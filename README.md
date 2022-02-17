@@ -1,7 +1,7 @@
 # CPPND Capstone Project Submission: Snake Game with extra food type
 
 * Short Description
-    For my Capstone Project submission, I have chosen to add extra features to the original Snake game code provided by Udacity. At random intervals of time, the game spawns in a "Super food" instead of the normal one, eating which gives y ou extra points. The "Super food" is spawned using a random number generator and rendered with a different colour. The project was completed using the a combination of the different concepts studied during the C++ Nano degree. Two new classes have been declared namely, "Food" class in a separat file "food.h" and "Player" class that is declared in the "snake.h" file that inherits publicly from the "Snake" class. The "Food" class handles the types of food being placed in the game and "Player" allows for the player to iput a player name.
+    For my Capstone Project submission, I have chosen to add extra features to the original Snake game code provided by Udacity. At random intervals of time, the game spawns in a "Super food" instead of the normal one, eating which gives y ou extra points. The "Super food" is spawned using a random number generator and rendered with a different colour. The project was completed using the a combination of the different concepts studied during the C++ Nano degree. Two new classes have been declared namely, "Food" class in a separat file "food.h" and "Player" class that is declared in the "snake.h" file that inherits publicly from the "Snake" class. The "Food" class handles the types of food being placed in the game and "Player" allows for the player to input a player name.
 
 * Fulfilled rubric criteria
     1. Loops, Functions, I/O
