@@ -1,9 +1,10 @@
 #include "game.h"
 #include <iostream>
 #include "SDL.h"
+#include "food.h"
 
-Game::Game(std::size_t grid_width, std::size_t grid_height)
-    : snake(grid_width, grid_height),
+Game::Game(std::size_t grid_width, std::size_t grid_height, std::string name)
+    : snake(name, grid_width, grid_height),
       engine(dev()),
       random_w(0, static_cast<int>(grid_width - 1)),
       random_h(0, static_cast<int>(grid_height - 1)) {
@@ -55,14 +56,37 @@ void Game::PlaceFood() {
   while (true) {
     x = random_w(engine);
     y = random_h(engine);
+    
     // Check that the location is not occupied by a snake item before placing
     // food.
     if (!snake.SnakeCell(x, y)) {
-      food.x = x;
-      food.y = y;
-      return;
+      food.x_pos = x;
+      food.y_pos = y;
+      break;
     }
   }
+
+  // internal random number generator
+    std::random_device rd;     
+    std::mt19937 rng(rd());    
+    std::uniform_int_distribution<int> ud(1,3); 
+    int randomNum = ud(rng); // a Random number between 1 and 4 is generated
+
+  // change food type according to number generated
+    if(randomNum == 1){
+      std::vector<int> v = {124,252,0}; // rgb values for the colour green
+      food.SetColour(std::move(v));
+      food.SetFoodValue(2);
+      food.SetType("Super");
+    }
+    else{
+      std::vector<int> v = {255,255,0}; // rgb values for the colour yellow
+      food.SetColour(std::move(v));
+      food.SetFoodValue(1);
+      food.SetType("Normal");
+    }
+
+    
 }
 
 void Game::Update() {
@@ -74,8 +98,9 @@ void Game::Update() {
   int new_y = static_cast<int>(snake.head_y);
 
   // Check if there's food over here
-  if (food.x == new_x && food.y == new_y) {
-    score++;
+  if (food.x_pos == new_x && food.y_pos == new_y) {
+    score += food.GetFoodValue();
+    std::cout << snake.GetName() << " has eaten " << food.GetType() << " food\n";
     PlaceFood();
     // Grow snake and increase speed.
     snake.GrowBody();

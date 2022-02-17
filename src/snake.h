@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "SDL.h"
+#include <string>
 
 class Snake {
  public:
@@ -36,5 +37,20 @@ class Snake {
   int grid_width;
   int grid_height;
 };
+
+class Player : public Snake
+{
+private:
+  std::string _name;
+public:
+  Player(std::string name, int w, int h) : Snake( w, h), _name(name) {}
+// Getters
+  std::string GetName() { return _name; }
+// Setters
+  void SetName(std::string n) { _name = n; }
+
+};
+
+
 
 #endif
